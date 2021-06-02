@@ -12,6 +12,7 @@ public class ExcelData {
 	private String softwareNo;
 	private String modelNo;
 	private String modelName;
+	private String transceiverSku;
 	
 	public ExcelData() {
 		locationId = "";
@@ -25,6 +26,7 @@ public class ExcelData {
 		softwareNo = "12345";
 		modelNo = "";
 		modelName = "";
+		transceiverSku = "";
 	}
 
 	public String getLocationId() {
@@ -109,6 +111,14 @@ public class ExcelData {
 
 	public void setModelName(String modelName) {
 		this.modelName = modelName;
+	}
+
+	public String getTransceiverSku() {
+		return transceiverSku;
+	}
+
+	public void setTransceiverSku(String transceiverSku) {
+		this.transceiverSku = transceiverSku;
 	}
 	
 }
