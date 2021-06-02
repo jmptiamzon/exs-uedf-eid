@@ -39,7 +39,6 @@ public class Controller {
 			JOptionPane.showMessageDialog(null, "Serial not found.");
 		
 		} else {
-			model.closeConnection();
 			/*File dir = new File(System.getProperty("user.home") + "\\Documents\\uedf-eid");
 			
 			if (!dir.isDirectory()) {
@@ -55,7 +54,7 @@ public class Controller {
 			}*/
 			
 			writeExcelData(excelData);
-			
+			JOptionPane.showMessageDialog(null, "File successfully generated.");
 		} 
 	}
 	/*

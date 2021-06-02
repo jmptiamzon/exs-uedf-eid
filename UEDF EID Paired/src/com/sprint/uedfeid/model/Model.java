@@ -11,29 +11,12 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Model {
-	private Connection conn;
-	private PreparedStatement statement;
-	private ResultSet rs;
-	
-	public Model() {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(
-							"", 
-							"", 
-							""
-					);
-		
-		} catch (ClassNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "Driver error: " + e.getMessage());
-			
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, "SQL error: " + e1.getMessage());
-			
-		}
-	}
+
 	
 	public List<ExcelData> getExcelData(String serialStr) {
+		Connection conn;
+		PreparedStatement statement;
+		ResultSet rs;
 		ExcelData tempExcelData;
 		List<ExcelData> excelData = new ArrayList<>();
 		String skuStr = "";
@@ -41,6 +24,13 @@ public class Model {
 		
 
 		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection(
+							"", 
+							"", 
+							""
+					);
+			
 			statement = conn.prepareStatement(
 					"SELECT DISTINCT MANF_NMS_LOCATION_ID, MANF_NMS_NAME, " + 
 					"EQUIP_NETWORK_TYPE, SUBSID_LCK_CD1_MSL, " + 
@@ -90,24 +80,18 @@ public class Model {
 				skuStr = "";
 				tempSkuName = "";
 			}
+
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Driver error: " + e.getMessage());
 			
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "SQL execution error: " + e.getMessage());
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, "SQL error: " + e1.getMessage());
 			
 		}
 		
 		return excelData;
 	}
-	
-	
-	
-	public void closeConnection() {
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Connection closing error: " + e.getMessage());
-			
-		}
-	}
+
 	
 }
